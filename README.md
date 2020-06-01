@@ -1,4 +1,4 @@
-**String encode / decode**
+#String encode / decode
 
 Translate string based on Pig Latin rules.
 
@@ -15,7 +15,7 @@ u -> 5
 
 
 
-**Building**
+#Building
 
 Build with `./scripts/build.sh`
 
@@ -23,7 +23,7 @@ Build with `./scripts/build.sh`
 
 
 
-**Running**
+#Running
 
 Run ./bin/stringCryptor with passing one of the flags: `"toPigLatin"`, `"encodeVowelsToIntegers"`, `"decodeIntegersToVowels"` and text
 
