@@ -3,13 +3,16 @@ package stringCryptor
 import (
 	"fmt"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 const (
 	PigLatinTail = "ay"
 	Vowels = "aeiou"
+	ToPigLatinFlag = "toPigLatin"
+	EncodeVowelsToIntegers = "encodeVowelsToIntegers"
+	DecodeIntegersToVowels = "decodeIntegersToVowels"
 )
 
 func Crypt(args []string) {
@@ -29,12 +32,14 @@ func Crypt(args []string) {
 	strToCrypt := strings.Join(args[1:], " ")
 
 	switch flag {
-	case "toPigLatin":
+	case ToPigLatinFlag:
 		fmt.Println(toPigLatin(strToCrypt))
-	case "encodeVowels":
-		fmt.Println(encodeVowels(strToCrypt))
+	case EncodeVowelsToIntegers:
+		fmt.Println(encodeVowelsToIntegers(strToCrypt))
+	case DecodeIntegersToVowels:
+		fmt.Println(decodeIntegersToVowels(strToCrypt))
 	default:
-		fmt.Println("Too far away.")
+		fmt.Printf("Please, use one of the flags: %v, %v, %v", ToPigLatinFlag, EncodeVowelsToIntegers, DecodeIntegersToVowels)
 	}
 }
 
@@ -69,13 +74,28 @@ func wordToPigLatin(word string) string {
 	return word
 }
 
-func encodeVowels(str string) string {
+func encodeVowelsToIntegers(str string) string {
 	for i, char := range str {
 		toString := strings.ToLower(string(char))
 
 		if isVowel(toString) {
 			index := strconv.Itoa(strings.Index(Vowels, toString) + 1)
 			str = str[:i] + index + str[i+1:]
+		}
+	}
+
+	return str
+}
+
+func decodeIntegersToVowels(str string) string {
+	for i, char := range str {
+		if charToInt, err := strconv.Atoi(string(char)); err == nil {
+
+			if charToInt != 0  && len(Vowels) >= charToInt {
+
+				vowel := string(Vowels[charToInt-1])
+				str = str[:i] + vowel + str[i+1:]
+			}
 		}
 	}
 
