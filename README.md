@@ -1,7 +1,6 @@
 **String encode / decode**
 
 Translate string based on Pig Latin rules.
-
 Encode vowels to integers according to rules (and vice versa):
 ```
 a -> 1
@@ -22,6 +21,10 @@ Build with ./scripts/build.sh
 Run ./bin/stringCryptor with passing one of the flags: "toPigLatin", "encodeVowelsToIntegers", "decodeIntegersToVowels" and text
 
 E.g.
+```
 ./bin/stringCryptor toPigLatin The weather is fine
+```
 The output should be:
+```
 eThay eatherway isay inefay
+```
