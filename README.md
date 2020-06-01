@@ -1,12 +1,15 @@
 **String encode / decode**
 
 Translate string based on Pig Latin rules.
+
 Encode vowels to integers according to rules (and vice versa):
+```
 a -> 1
 e -> 2
 i -> 3
 o -> 4
 u -> 5
+```
 
 
 **Building**
