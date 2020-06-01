@@ -28,18 +28,26 @@ func Crypt(args []string) {
 	}
 
 	strToCrypt := strings.Join(args[1:], " ")
+	transformBasedOnFlag(flag, strToCrypt)
+}
+
+func transformBasedOnFlag(flag string, translateTarget string) {
+	var transformed string
 
 	switch flag {
 	case ToPigLatinFlag:
-		fmt.Println(toPigLatin(strToCrypt))
+		transformed = toPigLatin(translateTarget)
 	case EncodeVowelsToIntegers:
-		fmt.Println(encodeVowelsToIntegers(strToCrypt))
+		transformed = encodeVowelsToIntegers(translateTarget)
 	case DecodeIntegersToVowels:
-		fmt.Println(decodeIntegersToVowels(strToCrypt))
+		transformed = decodeIntegersToVowels(translateTarget)
 	default:
-		fmt.Printf("Please, use one of the flags: %v, %v, %v", ToPigLatinFlag, EncodeVowelsToIntegers, DecodeIntegersToVowels)
+		transformed = "Please, use one of the flags: " +  ToPigLatinFlag + "," + EncodeVowelsToIntegers + "," + DecodeIntegersToVowels
 	}
+
+	fmt.Println(transformed)
 }
+
 func isVowel(char string) bool  {
 	vowels := Vowels + strings.ToUpper(Vowels)
 
