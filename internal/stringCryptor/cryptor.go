@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"strconv"
 )
 
 const (
@@ -28,8 +29,10 @@ func Crypt(args []string) {
 	strToCrypt := strings.Join(args[1:], " ")
 
 	switch flag {
-		case "toPigLatin":
+	case "toPigLatin":
 		fmt.Println(toPigLatin(strToCrypt))
+	case "encodeVowels":
+		fmt.Println(encodeVowels(strToCrypt))
 	default:
 		fmt.Println("Too far away.")
 	}
@@ -57,7 +60,7 @@ func wordToPigLatin(word string) string {
 	}
 
 	for i, v := range word {
-		if isVowel(v) {
+		if isVowel(string(v)) {
 			word = word[i:] + word[:i] + PigLatinTail
 			return word
 		}
@@ -66,9 +69,21 @@ func wordToPigLatin(word string) string {
 	return word
 }
 
+func encodeVowels(str string) string {
+	for i, char := range str {
+		toString := strings.ToLower(string(char))
 
-func isVowel(char rune) bool  {
+		if isVowel(toString) {
+			index := strconv.Itoa(strings.Index(Vowels, toString) + 1)
+			str = str[:i] + index + str[i+1:]
+		}
+	}
+
+	return str
+}
+
+func isVowel(char string) bool  {
 	vowels := Vowels + strings.ToUpper(Vowels)
 
-	return strings.Contains(vowels, string(char))
+	return strings.Contains(vowels, char)
 }
